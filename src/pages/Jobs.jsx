@@ -19,7 +19,7 @@ const Jobs = () => {
         return;
       }
 
-      const res = await axios.get("http://localhost:5000/api/jobs", {
+      const res = await axios.get("https://tech-forcinfbcknd.vercel.app/api/jobs", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setJobs(res.data);
@@ -31,7 +31,7 @@ const Jobs = () => {
 
   const deleteJob = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/jobs/${id}`, {
+      await axios.delete(`https://tech-forcinfbcknd.vercel.app/api/jobs/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchJobs(); // Refresh job listings after deletion

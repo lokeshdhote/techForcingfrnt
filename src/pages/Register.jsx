@@ -15,7 +15,7 @@ const Register = () => {
       const headers = {
         "Content-Type": "application/json",
       };
-      await axios.post("http://localhost:5000/api/auth/signup", form, { headers });
+      await axios.post("https://tech-forcinfbcknd.vercel.app/api/auth/signup", form, { headers });
       navigate("/login");
     } catch (err) {
       console.error(err);
