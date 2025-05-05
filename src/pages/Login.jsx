@@ -20,6 +20,7 @@ const Login = () => {
     try {
       const res = await axios.post(
         "https://tech-forcinfbcknd.vercel.app/api/auth/signin",
+        // " http://localhost:5000/api/auth/signin",
         {
           email: form.email,
           password: form.password,

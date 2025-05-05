@@ -19,8 +19,13 @@ const Jobs = () => {
         return;
       }
 
-      const res = await axios.get("https://tech-forcinfbcknd.vercel.app/api/jobs", {
+      const res = await axios.get(
+        // "http://localhost:5000/api/jobs",
+        "https://tech-forcinfbcknd.vercel.app/api/jobs",
+       
+         {
         headers: { Authorization: `Bearer ${token}` },
+        withCredentials:true,
       });
       setJobs(res.data);
     } catch (err) {
@@ -31,9 +36,13 @@ const Jobs = () => {
 
   const deleteJob = async (id) => {
     try {
-      await axios.delete(`https://tech-forcinfbcknd.vercel.app/api/jobs/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `https://tech-forcinfbcknd.vercel.app/api/jobs/${id}`,
+
+        // `  http://localhost:5000/api/jobs/${id}`,
+         {
+        headers: { Authorization: `Bearer ${token}` }, withCredentials:true,
+      }, );
       fetchJobs(); // Refresh job listings after deletion
     } catch (err) {
       setError("Error deleting job. Please try again.");

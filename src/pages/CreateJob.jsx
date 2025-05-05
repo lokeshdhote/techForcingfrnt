@@ -37,12 +37,15 @@ const CreateJob = () => {
     }
 
     try {
-      const response = await fetch('https://tech-forcinfbcknd.vercel.app/api/jobs', {
+      const response = await fetch(
+        //  ' http://localhost:5000/api/jobs',
+        'https://tech-forcinfbcknd.vercel.app/api/jobs',
+         {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-        },
+        }, withCredentials:true,
         body: JSON.stringify(job),
       });
 
