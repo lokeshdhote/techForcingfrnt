@@ -16,7 +16,7 @@ const Register = () => {
         "Content-Type": "application/json",
       };
       await axios.post(
-        "https://tech-forcinfbcknd.vercel.app/api/auth/signup",
+        "https://techforcinfbcknd.onrender.com/api/auth/signup",
         //  " http://localhost:5000/api/auth/signup",
          form,
        

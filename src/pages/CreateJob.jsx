@@ -39,7 +39,7 @@ const CreateJob = () => {
     try {
       const response = await fetch(
         //  ' http://localhost:5000/api/jobs',
-        'https://tech-forcinfbcknd.vercel.app/api/jobs',
+        'https://techforcinfbcknd.onrender.com/api/jobs',
          {
         method: 'POST',
         headers: {
