@@ -21,7 +21,7 @@ const Jobs = () => {
 
       const res = await axios.get(
         // "http://localhost:5000/api/jobs",
-        "https://techforcinfbcknd.onrender.com/api/jobs",
+        "https://techforcinfbcknd.onrender.com/api/jobs", 
        
          {
         headers: { Authorization: `Bearer ${token}` },
