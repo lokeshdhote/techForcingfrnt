@@ -30,32 +30,25 @@ const CreateJob = () => {
     setLoading(true);
     setError(null); 
 
+ 
     if (!token) {
       setError("No authentication token found. Please login.");
       setLoading(false);
       return;
     }
-
+    const headers= {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    }
     try {
-      const response = await fetch(
-        //  ' http://localhost:5000/api/jobs',
-        'https://techforcinfbcknd.onrender.com/api/jobs',
-         {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        }, withCredentials:true,
-        body: JSON.stringify(job),
-      });
-
+      
+      const response = await  axios.post("/jobs",{job},{headers});
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Something went wrong');
       }
-
-      navigate('/jobs');
-    } catch (err) {
+navigate('/jobs');
+    }    catch (err) {
       setError(err.message); 
       console.error('Error creating job:', err);
     } finally {

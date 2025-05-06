@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../utils/Axios";
 import { AuthContext } from "../AuthContext";
 
 const Login = () => {
@@ -18,27 +18,38 @@ const Login = () => {
     setLoading(true); // Start loading indicator
 
     try {
-      const res = await axios.post(
-        "https://techforcinfbcknd.onrender.com/api/auth/signin",
-        // " http://localhost:5000/api/auth/signin",
-        {
-          email: form.email,
-          password: form.password,
-        },
-        {
-          withCredentials: true,  // Send credentials with the request
-        }
-      );
-
-      // Handle successful login
+      const res  = await  axios.post("/signin",{ email: form.email, password: form.password , } );
+      console.log(res.data +"data");
+      
       login(res.data.token);
-      navigate("/home");
-    } catch (err) {
-      console.error("Login failed:", err);
+        navigate("/home");
+    } catch (error) {
+      console.error("Login failed:", error);
       setError("Login failed. Please check your credentials and try again.");
-    } finally {
-      setLoading(false); // Stop loading indicator
+      
     }
+    finally {
+        setLoading(false); // Stop loading indicator
+      }
+    // try {
+    //   const res = await axios.post(    {
+    //       email: form.email,
+    //       password: form.password,
+    //     },
+    //     {
+    //       withCredentials: true,  // Send credentials with the request
+    //     }
+    //   );
+
+    //   // Handle successful login
+    //   login(res.data.token);
+    //   navigate("/home");
+    // } catch (err) {
+    //   console.error("Login failed:", err);
+    //   setError("Login failed. Please check your credentials and try again.");
+    // } finally {
+    //   setLoading(false); // Stop loading indicator
+    // }
   };
 
   const handleRegisterRedirect = () => {
