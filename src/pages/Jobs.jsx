@@ -19,11 +19,8 @@ const Jobs = () => {
         return;
       }
 
-      const res = await axios.get(
-        // "http://localhost:5000/api/jobs",
-        "https://techforcinfbcknd.onrender.com/api/jobs", 
-       
-         {
+      const res = await axios.get("/jobs",
+        {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials:true,
       });
@@ -36,12 +33,10 @@ const Jobs = () => {
 
   const deleteJob = async (id) => {
     try {
-      await axios.delete(
-        `https://techforcinfbcknd.onrender.com/api/jobs/${id}`,
-
-        // `  http://localhost:5000/api/jobs/${id}`,
-         {
-        headers: { Authorization: `Bearer ${token}` }, withCredentials:true,
+      await axios.delete(`/jobs/${id}`,{
+        headers: { 
+          Authorization: `Bearer ${token}`
+         }, withCredentials:true,
       }, );
       fetchJobs(); // Refresh job listings after deletion
     } catch (err) {
