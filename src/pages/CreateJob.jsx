@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { AuthContext } from '../AuthContext'; 
 import Navbar from './Navbar';
-import axios from "../../utils/Axios";
+import axios from "../../utils/Axios"; // Assumes custom Axios instance is configured with baseURL
 
 const CreateJob = () => {
   const [job, setJob] = useState({
@@ -11,13 +11,13 @@ const CreateJob = () => {
     location: '',
     description: '',
     salary: '',
-    skills: '', // New field for skills
+    skills: '',
   });
 
-  const [error, setError] = useState(null); 
-  const [loading, setLoading] = useState(false); 
-  const navigate = useNavigate(); 
-  const { isAuthenticated, user } = useContext(AuthContext); 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useContext(AuthContext);
 
   const token = localStorage.getItem("token") || (isAuthenticated ? user?.token : null);
 
@@ -29,39 +29,34 @@ const CreateJob = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null); 
+    setError(null);
 
- 
     if (!token) {
       setError("No authentication token found. Please login.");
       setLoading(false);
       return;
     }
-    const headers= {
+
+    const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-    }
+    };
+
     try {
-      
-      const response = await  axios.post("/jobs",{job},{headers});
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Something went wrong');
-      }
-navigate('/jobs');
-    }    catch (err) {
-      setError(err.message); 
+      await axios.post("/jobs", job, { headers });
+      navigate('/jobs');
+    } catch (err) {
+      setError(err.response?.data?.message || err.message || 'Something went wrong');
       console.error('Error creating job:', err);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
-      <Navbar/>
+      <Navbar />
 
-      {/* Main Content */}
       <div className="flex-1 flex justify-center items-center bg-gray-100">
         <div className="w-full max-w-3xl p-8 bg-white shadow-lg rounded-xl">
           <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Create a New Job</h2>
@@ -125,7 +120,6 @@ navigate('/jobs');
               />
             </div>
 
-            {/* New Salary Input */}
             <div className="space-y-2">
               <label htmlFor="salary" className="text-gray-700 font-medium">Salary</label>
               <input
@@ -139,7 +133,6 @@ navigate('/jobs');
               />
             </div>
 
-            {/* New Skills Input */}
             <div className="space-y-2">
               <label htmlFor="skills" className="text-gray-700 font-medium">Skills (comma separated)</label>
               <input
