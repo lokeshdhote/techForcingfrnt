@@ -18,7 +18,7 @@ const Login = () => {
     setLoading(true); // Start loading indicator
 
     try {
-      const res  = await  axios.post("/signin",{ email: form.email, password: form.password , } );
+      const res  = await  axios.post("/auth/signin",{ email: form.email, password: form.password , } );
       console.log(res.data +"data");
       
       login(res.data.token);

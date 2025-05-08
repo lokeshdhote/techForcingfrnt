@@ -15,12 +15,7 @@ const Register = () => {
       const headers = {
         "Content-Type": "application/json",
       };
-      await axios.post(
-        "https://techforcinfbcknd.onrender.com/api/auth/signup",
-        //  " http://localhost:5000/api/auth/signup",
-         form,
-       
-         { headers , withCredentials:true});
+      await axios.post("/auth/signup",form,{ headers , withCredentials:true } );
       navigate("/login");
     } catch (err) {
       console.error(err);
