@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { AuthContext } from '../AuthContext'; 
 import Navbar from './Navbar';
+import axios from "../../utils/Axios";
 
 const CreateJob = () => {
   const [job, setJob] = useState({
